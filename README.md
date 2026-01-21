@@ -7,6 +7,7 @@
 [![PyPI version](https://img.shields.io/pypi/v/integradio?color=blue&logo=pypi&logoColor=white)](https://pypi.org/project/integradio/)
 [![Downloads](https://img.shields.io/pypi/dm/integradio?color=green&logo=pypi&logoColor=white)](https://pypi.org/project/integradio/)
 [![Tests](https://github.com/mikeyfrilot/integradio/actions/workflows/test.yml/badge.svg)](https://github.com/mikeyfrilot/integradio/actions/workflows/test.yml)
+[![codecov](https://codecov.io/gh/mikeyfrilot/integradio/graph/badge.svg)](https://codecov.io/gh/mikeyfrilot/integradio)
 [![Python 3.10+](https://img.shields.io/badge/python-3.10+-blue.svg?logo=python&logoColor=white)](https://www.python.org/downloads/)
 [![Gradio 5.0+](https://img.shields.io/badge/gradio-5.0+-orange.svg?logo=gradio&logoColor=white)](https://gradio.app/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
