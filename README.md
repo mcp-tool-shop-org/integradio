@@ -2,7 +2,9 @@
 
 [![Python 3.10+](https://img.shields.io/badge/python-3.10+-blue.svg)](https://www.python.org/downloads/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Gradio 4.0+](https://img.shields.io/badge/gradio-4.0+-orange.svg)](https://gradio.app/)
+[![Gradio 5.0+](https://img.shields.io/badge/gradio-5.0+-orange.svg)](https://gradio.app/)
+[![Tests](https://github.com/mikeyfrilot/integradio/actions/workflows/test.yml/badge.svg)](https://github.com/mikeyfrilot/integradio/actions/workflows/test.yml)
+[![PyPI version](https://badge.fury.io/py/integradio.svg)](https://badge.fury.io/py/integradio)
 
 Vector-embedded Gradio components for semantic codebase navigation.
 
