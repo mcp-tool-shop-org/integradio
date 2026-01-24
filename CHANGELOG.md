@@ -119,6 +119,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - pandas>=2.0.0
 - Optional: hnswlib>=0.7.0, fastapi>=0.100.0, uvicorn>=0.23.0
 
-[0.3.0]: https://github.com/mikeyfrilot/integradio/compare/v0.1.1...v0.3.0
-[0.1.1]: https://github.com/mikeyfrilot/integradio/compare/v0.1.0...v0.1.1
-[0.1.0]: https://github.com/mikeyfrilot/integradio/releases/tag/v0.1.0
+[0.3.0]: https://github.com/mcp-tool-shop/integradio/compare/v0.1.1...v0.3.0
+[0.1.1]: https://github.com/mcp-tool-shop/integradio/compare/v0.1.0...v0.1.1
+[0.1.0]: https://github.com/mcp-tool-shop/integradio/releases/tag/v0.1.0

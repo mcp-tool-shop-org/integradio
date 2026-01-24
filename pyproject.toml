@@ -64,10 +64,11 @@ dev = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/mikeyfrilot/integradio"
-Documentation = "https://github.com/mikeyfrilot/integradio#readme"
-Repository = "https://github.com/mikeyfrilot/integradio"
-Issues = "https://github.com/mikeyfrilot/integradio/issues"
+Homepage = "https://github.com/mcp-tool-shop/integradio"
+Documentation = "https://github.com/mcp-tool-shop/integradio#readme"
+Repository = "https://github.com/mcp-tool-shop/integradio.git"
+Issues = "https://github.com/mcp-tool-shop/integradio/issues"
+Changelog = "https://github.com/mcp-tool-shop/integradio/blob/main/CHANGELOG.md"
 
 [tool.setuptools.packages.find]
 where = ["."]
