@@ -90,3 +90,7 @@ Thumbs.db
 # Local development
 *.local
 .env.local
+site/.astro/
+site/node_modules/
+site/dist/
+node_modules/

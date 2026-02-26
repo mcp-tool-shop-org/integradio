@@ -14,34 +14,34 @@
 </p>
 
 
-## Overview
+## 概要
 
-Integradio extends [Gradio](https://gradio.app/) with semantic search capabilities powered by embeddings. Components carry vector representations that make them discoverable by intent rather than by ID or label alone.
+Integradioは、埋め込み技術を活用したセマンティック検索機能を[Gradio](https://gradio.app/)に追加します。コンポーネントはベクトル表現を持ち、IDやラベルだけでなく、意図に基づいて発見できるようになります。
 
-**Key Features:**
-- Non-invasive component wrapping (works with any Gradio component)
-- Semantic search via Ollama/nomic-embed-text
-- Automatic dataflow extraction from event listeners
-- Multiple visualization formats (Mermaid, D3.js, ASCII)
-- 10 pre-built page templates
-- FastAPI integration for programmatic access
+**主な機能:**
+- 侵入性のないコンポーネントラッピング（あらゆるGradioコンポーネントに対応）
+- Ollama/nomic-embed-textを使用したセマンティック検索
+- イベントリスナーからの自動データフロー抽出
+- 複数の可視化形式（Mermaid、D3.js、ASCII）
+- 10種類のプリビルドページテンプレート
+- プログラムによるアクセスを可能にするFastAPI連携
 
-## Why Integradio?
+## Integradioを選ぶ理由
 
-| Problem | Solution |
-|---------|----------|
-| Gradio components are opaque to AI agents | Semantic intents make every widget discoverable |
-| Building dashboards from scratch every time | 10 pre-built page templates, ready to customize |
-| No programmatic access to component graphs | FastAPI routes + D3.js / Mermaid visualization |
-| Embedding logic scattered across your app | One wrapper, automatic vector storage |
+| 問題点 | 解決策 |
+| --------- | ---------- |
+| GradioコンポーネントはAIエージェントにとってブラックボックス | セマンティックな意図により、すべてのウィジェットが発見可能になる |
+| 毎回、ダッシュボードをゼロから構築する必要がある | 10種類のプリビルドページテンプレートがあり、カスタマイズが容易 |
+| コンポーネントグラフへのプログラムによるアクセスが不可能 | FastAPIルートとD3.js/Mermaidによる可視化 |
+| 埋め込みロジックがアプリケーション全体に散在している | 1つのラッパーで、自動的にベクトル情報を保存 |
 
-## Requirements
+## 必要条件
 
-- Python 3.10+
-- [Ollama](https://ollama.ai/) with `nomic-embed-text` model
-- Gradio 4.0+ (compatible with Gradio 5.x and 6.x)
+- Python 3.10以上
+- [Ollama](https://ollama.ai/) と `nomic-embed-text` モデル
+- Gradio 4.0以上（Gradio 5.xおよび6.xと互換性あり）
 
-## Installation
+## インストール
 
 ```bash
 # Basic installation
@@ -54,9 +54,9 @@ pip install "integradio[all]"
 pip install -e ".[dev]"
 ```
 
-### Ollama Setup
+### Ollamaの設定
 
-Integradio requires Ollama for generating embeddings:
+Integradioは、埋め込み情報を生成するためにOllamaが必要です。
 
 ```bash
 # Install Ollama (see https://ollama.ai/)
@@ -67,7 +67,7 @@ ollama pull nomic-embed-text
 ollama serve
 ```
 
-## Quick Start
+## クイックスタート
 
 ```python
 import gradio as gr
@@ -99,11 +99,11 @@ print(demo.summary())  # Shows all registered components
 demo.launch()
 ```
 
-## API Reference
+## APIリファレンス
 
 ### SemanticBlocks
 
-Extended `gr.Blocks` with registry and embedder integration.
+`gr.Blocks`を拡張し、レジストリと埋め込み機能との連携を実現します。
 
 ```python
 with SemanticBlocks(
@@ -125,7 +125,7 @@ demo.summary()               # Text report
 
 ### semantic()
 
-Wrap any Gradio component with semantic metadata.
+任意のGradioコンポーネントを、セマンティックなメタデータでラップします。
 
 ```python
 component = semantic(
@@ -135,9 +135,9 @@ component = semantic(
 )
 ```
 
-### Specialized Wrappers
+### 特殊なラッパー
 
-For complex components, use specialized wrappers that provide richer semantic metadata:
+複雑なコンポーネントの場合、より詳細なセマンティックメタデータを提供する特殊なラッパーを使用します。
 
 ```python
 from integradio import (
@@ -204,9 +204,9 @@ metrics_chart = semantic_plot(
 # Auto-tags: ["output", "visualization", "chart-line", "timeseries", "domain-metrics"]
 ```
 
-### Page Templates
+### ページテンプレート
 
-10 pre-built page templates for common UI patterns:
+一般的なUIパターンに対応した10種類のプリビルドページテンプレートを用意しています。
 
 ```python
 from integradio.pages import (
@@ -227,7 +227,7 @@ page = ChatPage()
 page.launch()
 ```
 
-## Visualization
+## 可視化
 
 ```python
 from integradio.viz import (
@@ -245,7 +245,7 @@ with open("graph.html", "w") as f:
     f.write(html)
 ```
 
-## FastAPI Integration
+## FastAPI連携
 
 ```python
 from fastapi import FastAPI
@@ -261,12 +261,12 @@ demo.add_api_routes(app)
 # GET /semantic/summary
 ```
 
-## Examples
+## サンプル
 
-See the `examples/` directory:
+`examples/`ディレクトリをご覧ください。
 
-- `basic_app.py` - Simple search demo
-- `full_app.py` - All 10 page templates showcase
+- `basic_app.py` - シンプルな検索デモ
+- `full_app.py` - すべての10種類のページテンプレートを紹介
 
 ```bash
 # Run basic example
@@ -274,7 +274,7 @@ python examples/basic_app.py
 # Visit http://localhost:7860
 ```
 
-## Development
+## 開発
 
 ```bash
 # Install dev dependencies
@@ -293,7 +293,7 @@ mypy integradio
 ruff check integradio
 ```
 
-## Architecture
+## アーキテクチャ
 
 ```
 integradio/
@@ -315,15 +315,15 @@ integradio/
 └── inspector/         # Component tree navigation
 ```
 
-## License
+## ライセンス
 
-MIT License - see [LICENSE](LICENSE) for details.
+MITライセンス - 詳細については、[LICENSE](LICENSE)をご覧ください。
 
-## Contributing
+## 貢献
 
-Contributions welcome! Please read our contributing guidelines and submit PRs.
+貢献を歓迎します！ 貢献ガイドラインをお読みいただき、プルリクエストを送信してください。
 
-## Links
+## リンク
 
 - [Gradio Documentation](https://gradio.app/docs/)
 - [Ollama](https://ollama.ai/)

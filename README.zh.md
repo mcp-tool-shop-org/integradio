@@ -14,34 +14,34 @@
 </p>
 
 
-## Overview
+## 概述
 
-Integradio extends [Gradio](https://gradio.app/) with semantic search capabilities powered by embeddings. Components carry vector representations that make them discoverable by intent rather than by ID or label alone.
+Integradio 扩展了 [Gradio](https://gradio.app/)，增加了基于嵌入技术的语义搜索功能。 组件携带向量表示，使其可以通过意图进行发现，而不仅仅是通过 ID 或标签。
 
-**Key Features:**
-- Non-invasive component wrapping (works with any Gradio component)
-- Semantic search via Ollama/nomic-embed-text
-- Automatic dataflow extraction from event listeners
-- Multiple visualization formats (Mermaid, D3.js, ASCII)
-- 10 pre-built page templates
-- FastAPI integration for programmatic access
+**主要特性：**
+- 非侵入式的组件封装（适用于任何 Gradio 组件）
+- 通过 Ollama/nomic-embed-text 实现语义搜索
+- 自动从事件监听器中提取数据流
+- 多种可视化格式（Mermaid、D3.js、ASCII）
+- 10 个预构建的页面模板
+- FastAPI 集成，提供编程访问接口
 
-## Why Integradio?
+## 为什么选择 Integradio？
 
-| Problem | Solution |
-|---------|----------|
-| Gradio components are opaque to AI agents | Semantic intents make every widget discoverable |
-| Building dashboards from scratch every time | 10 pre-built page templates, ready to customize |
-| No programmatic access to component graphs | FastAPI routes + D3.js / Mermaid visualization |
-| Embedding logic scattered across your app | One wrapper, automatic vector storage |
+| 问题 | 解决方案 |
+| --------- | ---------- |
+| Gradio 组件对 AI 代理来说是不可见的。 | 语义意图使每个组件都易于发现。 |
+| 每次都从头开始构建仪表盘。 | 10 个预构建的页面模板，可立即定制。 |
+| 无法对组件图进行编程访问。 | FastAPI 路由 + D3.js / Mermaid 可视化。 |
+| 嵌入逻辑分散在您的应用程序中。 | 一个封装器，自动向量存储。 |
 
-## Requirements
+## 需求
 
 - Python 3.10+
-- [Ollama](https://ollama.ai/) with `nomic-embed-text` model
-- Gradio 4.0+ (compatible with Gradio 5.x and 6.x)
+- [Ollama](https://ollama.ai/)，以及 `nomic-embed-text` 模型
+- Gradio 4.0+（兼容 Gradio 5.x 和 6.x）
 
-## Installation
+## 安装
 
 ```bash
 # Basic installation
@@ -54,9 +54,9 @@ pip install "integradio[all]"
 pip install -e ".[dev]"
 ```
 
-### Ollama Setup
+### Ollama 设置
 
-Integradio requires Ollama for generating embeddings:
+Integradio 需要 Ollama 来生成嵌入向量：
 
 ```bash
 # Install Ollama (see https://ollama.ai/)
@@ -67,7 +67,7 @@ ollama pull nomic-embed-text
 ollama serve
 ```
 
-## Quick Start
+## 快速开始
 
 ```python
 import gradio as gr
@@ -99,11 +99,11 @@ print(demo.summary())  # Shows all registered components
 demo.launch()
 ```
 
-## API Reference
+## API 参考
 
 ### SemanticBlocks
 
-Extended `gr.Blocks` with registry and embedder integration.
+扩展了 `gr.Blocks`，集成了注册表和嵌入器。
 
 ```python
 with SemanticBlocks(
@@ -125,7 +125,7 @@ demo.summary()               # Text report
 
 ### semantic()
 
-Wrap any Gradio component with semantic metadata.
+使用语义元数据包装任何 Gradio 组件。
 
 ```python
 component = semantic(
@@ -135,9 +135,9 @@ component = semantic(
 )
 ```
 
-### Specialized Wrappers
+### 专用封装器
 
-For complex components, use specialized wrappers that provide richer semantic metadata:
+对于复杂的组件，请使用提供更丰富语义元数据的专用封装器：
 
 ```python
 from integradio import (
@@ -204,9 +204,9 @@ metrics_chart = semantic_plot(
 # Auto-tags: ["output", "visualization", "chart-line", "timeseries", "domain-metrics"]
 ```
 
-### Page Templates
+### 页面模板
 
-10 pre-built page templates for common UI patterns:
+10 个预构建的页面模板，适用于常见的 UI 模式：
 
 ```python
 from integradio.pages import (
@@ -227,7 +227,7 @@ page = ChatPage()
 page.launch()
 ```
 
-## Visualization
+## 可视化
 
 ```python
 from integradio.viz import (
@@ -245,7 +245,7 @@ with open("graph.html", "w") as f:
     f.write(html)
 ```
 
-## FastAPI Integration
+## FastAPI 集成
 
 ```python
 from fastapi import FastAPI
@@ -261,12 +261,12 @@ demo.add_api_routes(app)
 # GET /semantic/summary
 ```
 
-## Examples
+## 示例
 
-See the `examples/` directory:
+请查看 `examples/` 目录：
 
-- `basic_app.py` - Simple search demo
-- `full_app.py` - All 10 page templates showcase
+- `basic_app.py` - 简单的搜索演示
+- `full_app.py` - 展示所有 10 个页面模板
 
 ```bash
 # Run basic example
@@ -274,7 +274,7 @@ python examples/basic_app.py
 # Visit http://localhost:7860
 ```
 
-## Development
+## 开发
 
 ```bash
 # Install dev dependencies
@@ -293,7 +293,7 @@ mypy integradio
 ruff check integradio
 ```
 
-## Architecture
+## 架构
 
 ```
 integradio/
@@ -315,17 +315,17 @@ integradio/
 └── inspector/         # Component tree navigation
 ```
 
-## License
+## 许可证
 
-MIT License - see [LICENSE](LICENSE) for details.
+MIT 许可证 - 详情请参阅 [LICENSE](LICENSE)。
 
-## Contributing
+## 贡献
 
-Contributions welcome! Please read our contributing guidelines and submit PRs.
+欢迎贡献！请阅读我们的贡献指南并提交 PR。
 
-## Links
+## 链接
 
-- [Gradio Documentation](https://gradio.app/docs/)
+- [Gradio 文档](https://gradio.app/docs/)
 - [Ollama](https://ollama.ai/)
 - [nomic-embed-text](https://ollama.ai/library/nomic-embed-text)
 

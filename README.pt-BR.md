@@ -14,34 +14,34 @@
 </p>
 
 
-## Overview
+## Visão Geral
 
-Integradio extends [Gradio](https://gradio.app/) with semantic search capabilities powered by embeddings. Components carry vector representations that make them discoverable by intent rather than by ID or label alone.
+Integradio estende o [Gradio](https://gradio.app/) com capacidades de busca semântica, impulsionadas por embeddings. Os componentes carregam representações vetoriais que os tornam descobertos por intenção, e não apenas por ID ou rótulo.
 
-**Key Features:**
-- Non-invasive component wrapping (works with any Gradio component)
-- Semantic search via Ollama/nomic-embed-text
-- Automatic dataflow extraction from event listeners
-- Multiple visualization formats (Mermaid, D3.js, ASCII)
-- 10 pre-built page templates
-- FastAPI integration for programmatic access
+**Principais Características:**
+- Envolvimento de componentes não intrusivo (funciona com qualquer componente Gradio)
+- Busca semântica via Ollama/nomic-embed-text
+- Extração automática de fluxos de dados a partir de listeners de eventos
+- Múltiplos formatos de visualização (Mermaid, D3.js, ASCII)
+- 10 modelos de página pré-construídos
+- Integração com FastAPI para acesso programático
 
-## Why Integradio?
+## Por que Integradio?
 
-| Problem | Solution |
-|---------|----------|
-| Gradio components are opaque to AI agents | Semantic intents make every widget discoverable |
-| Building dashboards from scratch every time | 10 pre-built page templates, ready to customize |
-| No programmatic access to component graphs | FastAPI routes + D3.js / Mermaid visualization |
-| Embedding logic scattered across your app | One wrapper, automatic vector storage |
+| Problema | Solução |
+| --------- | ---------- |
+| Componentes Gradio são opacos para agentes de IA | Intenções semânticas tornam cada widget descobertável |
+| Construir painéis do zero a cada vez | 10 modelos de página pré-construídos, prontos para personalização |
+| Sem acesso programático aos gráficos de componentes | Rotas FastAPI + visualização D3.js / Mermaid |
+| Lógica de embedding espalhada por todo o seu aplicativo | Um wrapper, armazenamento automático de vetores |
 
-## Requirements
+## Requisitos
 
 - Python 3.10+
-- [Ollama](https://ollama.ai/) with `nomic-embed-text` model
-- Gradio 4.0+ (compatible with Gradio 5.x and 6.x)
+- [Ollama](https://ollama.ai/) com o modelo `nomic-embed-text`
+- Gradio 4.0+ (compatível com Gradio 5.x e 6.x)
 
-## Installation
+## Instalação
 
 ```bash
 # Basic installation
@@ -54,9 +54,9 @@ pip install "integradio[all]"
 pip install -e ".[dev]"
 ```
 
-### Ollama Setup
+### Configuração do Ollama
 
-Integradio requires Ollama for generating embeddings:
+Integradio requer Ollama para gerar embeddings:
 
 ```bash
 # Install Ollama (see https://ollama.ai/)
@@ -67,7 +67,7 @@ ollama pull nomic-embed-text
 ollama serve
 ```
 
-## Quick Start
+## Início Rápido
 
 ```python
 import gradio as gr
@@ -99,11 +99,11 @@ print(demo.summary())  # Shows all registered components
 demo.launch()
 ```
 
-## API Reference
+## Referência da API
 
 ### SemanticBlocks
 
-Extended `gr.Blocks` with registry and embedder integration.
+`gr.Blocks` estendido com registro e integração de embedder.
 
 ```python
 with SemanticBlocks(
@@ -125,7 +125,7 @@ demo.summary()               # Text report
 
 ### semantic()
 
-Wrap any Gradio component with semantic metadata.
+Envolve qualquer componente Gradio com metadados semânticos.
 
 ```python
 component = semantic(
@@ -135,9 +135,9 @@ component = semantic(
 )
 ```
 
-### Specialized Wrappers
+### Wrappers Especializados
 
-For complex components, use specialized wrappers that provide richer semantic metadata:
+Para componentes complexos, use wrappers especializados que fornecem metadados semânticos mais ricos:
 
 ```python
 from integradio import (
@@ -204,9 +204,9 @@ metrics_chart = semantic_plot(
 # Auto-tags: ["output", "visualization", "chart-line", "timeseries", "domain-metrics"]
 ```
 
-### Page Templates
+### Modelos de Página
 
-10 pre-built page templates for common UI patterns:
+10 modelos de página pré-construídos para padrões de UI comuns:
 
 ```python
 from integradio.pages import (
@@ -227,7 +227,7 @@ page = ChatPage()
 page.launch()
 ```
 
-## Visualization
+## Visualização
 
 ```python
 from integradio.viz import (
@@ -245,7 +245,7 @@ with open("graph.html", "w") as f:
     f.write(html)
 ```
 
-## FastAPI Integration
+## Integração com FastAPI
 
 ```python
 from fastapi import FastAPI
@@ -261,12 +261,12 @@ demo.add_api_routes(app)
 # GET /semantic/summary
 ```
 
-## Examples
+## Exemplos
 
-See the `examples/` directory:
+Veja o diretório `examples/`:
 
-- `basic_app.py` - Simple search demo
-- `full_app.py` - All 10 page templates showcase
+- `basic_app.py` - Demonstração de busca simples
+- `full_app.py` - Demonstração de todos os 10 modelos de página
 
 ```bash
 # Run basic example
@@ -274,7 +274,7 @@ python examples/basic_app.py
 # Visit http://localhost:7860
 ```
 
-## Development
+## Desenvolvimento
 
 ```bash
 # Install dev dependencies
@@ -293,7 +293,7 @@ mypy integradio
 ruff check integradio
 ```
 
-## Architecture
+## Arquitetura
 
 ```
 integradio/
@@ -315,17 +315,17 @@ integradio/
 └── inspector/         # Component tree navigation
 ```
 
-## License
+## Licença
 
-MIT License - see [LICENSE](LICENSE) for details.
+Licença MIT - veja [LICENSE](LICENSE) para detalhes.
 
-## Contributing
+## Contribuições
 
-Contributions welcome! Please read our contributing guidelines and submit PRs.
+Contribuições são bem-vindas! Por favor, leia nossas diretrizes de contribuição e envie PRs.
 
 ## Links
 
-- [Gradio Documentation](https://gradio.app/docs/)
+- [Documentação do Gradio](https://gradio.app/docs/)
 - [Ollama](https://ollama.ai/)
 - [nomic-embed-text](https://ollama.ai/library/nomic-embed-text)
 

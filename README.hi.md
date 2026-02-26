@@ -14,34 +14,34 @@
 </p>
 
 
-## Overview
+## सारांश।
 
-Integradio extends [Gradio](https://gradio.app/) with semantic search capabilities powered by embeddings. Components carry vector representations that make them discoverable by intent rather than by ID or label alone.
+इंटीग्रैडियो, [ग्रैडियो](https://gradio.app/) को एम्बेडिंग तकनीक द्वारा संचालित सिमेंटिक खोज क्षमताओं के साथ विस्तारित करता है। इसके घटक वेक्टर प्रतिनिधित्व (वेक्टर रिप्रेजेंटेशन) रखते हैं, जो उन्हें केवल आईडी या लेबल के आधार पर नहीं, बल्कि इरादे के आधार पर खोजने योग्य बनाते हैं।
 
-**Key Features:**
-- Non-invasive component wrapping (works with any Gradio component)
-- Semantic search via Ollama/nomic-embed-text
-- Automatic dataflow extraction from event listeners
-- Multiple visualization formats (Mermaid, D3.js, ASCII)
-- 10 pre-built page templates
-- FastAPI integration for programmatic access
+**मुख्य विशेषताएं:**
+- गैर-आक्रामक घटक रैपिंग (यह किसी भी Gradio घटक के साथ काम करता है)
+- ओलामा/नोमिक-एम्बेड-टेक्स्ट के माध्यम से सिमेंटिक खोज
+- इवेंट लिसनरों से स्वचालित डेटा प्रवाह निष्कर्षण
+- कई विज़ुअलाइज़ेशन प्रारूप (मर्मेड, डी3.जेएस, एएससीआईआई)
+- 10 पूर्व-निर्मित पेज टेम्पलेट
+- प्रोग्रामेटिक पहुंच के लिए फास्टएपी एकीकरण।
 
-## Why Integradio?
+## इंटीग्रैडियो क्यों?
 
-| Problem | Solution |
-|---------|----------|
-| Gradio components are opaque to AI agents | Semantic intents make every widget discoverable |
-| Building dashboards from scratch every time | 10 pre-built page templates, ready to customize |
-| No programmatic access to component graphs | FastAPI routes + D3.js / Mermaid visualization |
-| Embedding logic scattered across your app | One wrapper, automatic vector storage |
+| समस्या। | समाधान। |
+| "Please provide the English text you would like me to translate into Hindi." | ज़रूर, मैं आपकी मदद कर सकता हूँ। कृपया वह अंग्रेजी पाठ प्रदान करें जिसका आप हिंदी में अनुवाद करवाना चाहते हैं। |
+| ग्रैडियो के घटक कृत्रिम बुद्धिमत्ता (एआई) एजेंटों के लिए अपारदर्शी होते हैं। | सिमेंटिक इंटेंट (अर्थ संबंधी इरादे) हर विजेट को आसानी से खोजने योग्य बनाते हैं। |
+| हर बार शुरुआत से डैशबोर्ड बनाना। | 10 पहले से तैयार किए गए पेज टेम्प्लेट, जिन्हें आप अपनी आवश्यकताओं के अनुसार अनुकूलित कर सकते हैं। |
+| घटकों के ग्राफ तक प्रोग्रामेटिक रूप से पहुंचने की कोई सुविधा नहीं है। | फास्टएपीआई (FastAPI) रूट + डी3.js (D3.js) / मर्मेड (Mermaid) विज़ुअलाइज़ेशन। |
+| आपके एप्लिकेशन में बिखरे हुए लॉजिक को एक साथ जोड़ना। | एक रैपर, स्वचालित वेक्टर संग्रहण। |
 
-## Requirements
+## आवश्यकताएं।
 
-- Python 3.10+
-- [Ollama](https://ollama.ai/) with `nomic-embed-text` model
-- Gradio 4.0+ (compatible with Gradio 5.x and 6.x)
+- पायथन 3.10 या उससे ऊपर का संस्करण
+- [ओलामा](https://ollama.ai/) जिसमें `nomic-embed-text` मॉडल शामिल है
+- ग्राडियो 4.0 या उससे ऊपर का संस्करण (ग्राडियो 5.x और 6.x के साथ संगत)
 
-## Installation
+## स्थापना।
 
 ```bash
 # Basic installation
@@ -54,9 +54,9 @@ pip install "integradio[all]"
 pip install -e ".[dev]"
 ```
 
-### Ollama Setup
+### ओलामा का सेटअप।
 
-Integradio requires Ollama for generating embeddings:
+इंटीग्रिडिओ को एम्बेडिंग उत्पन्न करने के लिए ओलामा की आवश्यकता होती है:
 
 ```bash
 # Install Ollama (see https://ollama.ai/)
@@ -67,7 +67,7 @@ ollama pull nomic-embed-text
 ollama serve
 ```
 
-## Quick Start
+## शुरुआत कैसे करें।
 
 ```python
 import gradio as gr
@@ -99,11 +99,11 @@ print(demo.summary())  # Shows all registered components
 demo.launch()
 ```
 
-## API Reference
+## एपीआई संदर्भ।
 
-### SemanticBlocks
+### सिमेंटिक ब्लॉक्स।
 
-Extended `gr.Blocks` with registry and embedder integration.
+`gr.Blocks` को रजिस्ट्री (registry) और एम्बेडर (embedder) के साथ एकीकृत किया गया है।
 
 ```python
 with SemanticBlocks(
@@ -123,9 +123,9 @@ demo.describe(component)     # Full metadata dump
 demo.summary()               # Text report
 ```
 
-### semantic()
+### अर्थ संबंधी।
 
-Wrap any Gradio component with semantic metadata.
+किसी भी Gradio घटक को अर्थपूर्ण मेटाडेटा के साथ लपेटें।
 
 ```python
 component = semantic(
@@ -135,9 +135,9 @@ component = semantic(
 )
 ```
 
-### Specialized Wrappers
+### विशेष प्रकार की पैकेजिंग सामग्री।
 
-For complex components, use specialized wrappers that provide richer semantic metadata:
+जटिल घटकों के लिए, विशेष रैपरों का उपयोग करें जो अधिक विस्तृत अर्थ संबंधी मेटाडेटा प्रदान करते हैं:
 
 ```python
 from integradio import (
@@ -204,9 +204,9 @@ metrics_chart = semantic_plot(
 # Auto-tags: ["output", "visualization", "chart-line", "timeseries", "domain-metrics"]
 ```
 
-### Page Templates
+### पृष्ठ टेम्पलेट्स।
 
-10 pre-built page templates for common UI patterns:
+सामान्य यूआई (UI) डिजाइनों के लिए 10 पहले से तैयार किए गए पेज टेम्प्लेट:
 
 ```python
 from integradio.pages import (
@@ -227,7 +227,7 @@ page = ChatPage()
 page.launch()
 ```
 
-## Visualization
+## दृश्य प्रस्तुतीकरण।
 
 ```python
 from integradio.viz import (
@@ -245,7 +245,7 @@ with open("graph.html", "w") as f:
     f.write(html)
 ```
 
-## FastAPI Integration
+## फास्टएपी एकीकरण।
 
 ```python
 from fastapi import FastAPI
@@ -261,12 +261,12 @@ demo.add_api_routes(app)
 # GET /semantic/summary
 ```
 
-## Examples
+## उदाहरण।
 
-See the `examples/` directory:
+`examples/` नामक फ़ोल्डर को देखें:
 
-- `basic_app.py` - Simple search demo
-- `full_app.py` - All 10 page templates showcase
+- `basic_app.py` - एक साधारण खोज का प्रदर्शन।
+- `full_app.py` - सभी 10 पेज टेम्प्लेट का प्रदर्शन।
 
 ```bash
 # Run basic example
@@ -274,7 +274,7 @@ python examples/basic_app.py
 # Visit http://localhost:7860
 ```
 
-## Development
+## विकास।
 
 ```bash
 # Install dev dependencies
@@ -293,7 +293,7 @@ mypy integradio
 ruff check integradio
 ```
 
-## Architecture
+## आर्किटेक्चर।
 
 ```
 integradio/
@@ -315,17 +315,17 @@ integradio/
 └── inspector/         # Component tree navigation
 ```
 
-## License
+## लाइसेंस।
 
-MIT License - see [LICENSE](LICENSE) for details.
+एमआईटी लाइसेंस - विवरण के लिए [LICENSE](LICENSE) देखें।
 
-## Contributing
+## योगदान करना।
 
-Contributions welcome! Please read our contributing guidelines and submit PRs.
+योगदानों का स्वागत है! कृपया हमारे योगदान संबंधी दिशानिर्देश पढ़ें और पुल रिक्वेस्ट (पीआर) जमा करें।
 
-## Links
+## लिंक्स।
 
-- [Gradio Documentation](https://gradio.app/docs/)
-- [Ollama](https://ollama.ai/)
-- [nomic-embed-text](https://ollama.ai/library/nomic-embed-text)
+- [ग्रैडियो प्रलेखन](https://gradio.app/docs/)
+- [ओलामा](https://ollama.ai/)
+- [नोमिक-एम्बेड-टेक्स्ट](https://ollama.ai/library/nomic-embed-text)
 
