@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "integradio"
-version = "0.3.3"
+version = "0.3.4"
 description = "Vector-embedded Gradio components for semantic codebase navigation"
 readme = "README.md"
 license = "MIT"
