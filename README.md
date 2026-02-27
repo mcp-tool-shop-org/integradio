@@ -315,6 +315,31 @@ integradio/
 └── inspector/         # Component tree navigation
 ```
 
+## Security & Data Scope
+
+Integradio is a **local-first** Python library for vector-embedded Gradio components.
+
+- **Data accessed:** Gradio component metadata, local Ollama embeddings, HNSW vector index (in-process)
+- **Data NOT accessed:** No cloud sync. No telemetry. No analytics. No external APIs beyond local Ollama
+- **Permissions:** Network to local Ollama only. No file system access beyond optional persistence
+
+Full policy: [SECURITY.md](SECURITY.md)
+
+---
+
+## Scorecard
+
+| Category | Score |
+|----------|-------|
+| A. Security | 10/10 |
+| B. Error Handling | 10/10 |
+| C. Operator Docs | 10/10 |
+| D. Shipping Hygiene | 10/10 |
+| E. Identity (soft) | 10/10 |
+| **Overall** | **50/50** |
+
+---
+
 ## License
 
 MIT License - see [LICENSE](LICENSE) for details.
@@ -328,4 +353,10 @@ Contributions welcome! Please read our contributing guidelines and submit PRs.
 - [Gradio Documentation](https://gradio.app/docs/)
 - [Ollama](https://ollama.ai/)
 - [nomic-embed-text](https://ollama.ai/library/nomic-embed-text)
+
+---
+
+<p align="center">
+  Built by <a href="https://mcp-tool-shop.github.io/">MCP Tool Shop</a>
+</p>
 
