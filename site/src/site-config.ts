@@ -14,7 +14,7 @@ export const config: SiteConfig = {
     headlineAccent: 'semantic Gradio components.',
     description: 'Extend Gradio with vector embeddings. Components carry semantic intents — discoverable by meaning, not just IDs. Powered by Ollama and nomic-embed-text.',
     primaryCta: { href: '#quick-start', label: 'Get started' },
-    secondaryCta: { href: '#features', label: 'Learn more' },
+    secondaryCta: { href: 'handbook/', label: 'Read the Handbook' },
     previews: [
       { label: 'Install', code: 'pip install integradio' },
       { label: 'Wrap', code: 'semantic(gr.Textbox(), intent="user enters search terms")' },
