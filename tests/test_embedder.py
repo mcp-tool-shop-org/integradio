@@ -7,7 +7,7 @@ Priority 4: External dependency tests.
 import pytest
 import numpy as np
 from pathlib import Path
-from unittest.mock import patch, MagicMock
+from unittest.mock import patch, MagicMock, PropertyMock
 import json
 
 from integradio.embedder import Embedder
@@ -45,6 +45,12 @@ class TestEmbedderUnit:
 
 class TestEmbedderWithMock:
     """Tests using mocked HTTP calls (no Ollama needed)."""
+
+    @pytest.fixture(autouse=True)
+    def _force_available(self):
+        """Force Embedder.available=True so mocked httpx.post is called."""
+        with patch.object(Embedder, "available", new_callable=PropertyMock, return_value=True):
+            yield
 
     @patch("integradio.embedder.httpx.post")
     def test_embed_single_text(self, mock_post):
@@ -137,6 +143,12 @@ class TestEmbedderWithMock:
 class TestEmbedderCachePersistence:
     """Test cache persistence to disk."""
 
+    @pytest.fixture(autouse=True)
+    def _force_available(self):
+        """Force Embedder.available=True so mocked httpx.post is called."""
+        with patch.object(Embedder, "available", new_callable=PropertyMock, return_value=True):
+            yield
+
     @patch("integradio.embedder.httpx.post")
     def test_cache_persistence(self, mock_post, temp_cache_dir):
         """With cache_dir, verify cache survives new Embedder instance."""
@@ -185,6 +197,12 @@ class TestEmbedderCachePersistence:
 
 class TestEmbedderBatchCaching:
     """Test batch embedding with cache interaction."""
+
+    @pytest.fixture(autouse=True)
+    def _force_available(self):
+        """Force Embedder.available=True so mocked httpx.post is called."""
+        with patch.object(Embedder, "available", new_callable=PropertyMock, return_value=True):
+            yield
 
     @patch("integradio.embedder.httpx.post")
     def test_batch_uses_cache_for_known_texts(self, mock_post):
@@ -364,6 +382,12 @@ class TestErrorHandling:
 class TestEdgeCases:
     """Test edge cases and boundary conditions."""
 
+    @pytest.fixture(autouse=True)
+    def _force_available(self):
+        """Force Embedder.available=True so mocked httpx.post is called."""
+        with patch.object(Embedder, "available", new_callable=PropertyMock, return_value=True):
+            yield
+
     @patch("integradio.embedder.httpx.post")
     def test_empty_string_embed(self, mock_post):
         """Embedding empty string works."""
@@ -487,6 +511,12 @@ class TestEdgeCases:
 
 class TestCacheEdgeCases:
     """Test cache edge cases."""
+
+    @pytest.fixture(autouse=True)
+    def _force_available(self):
+        """Force Embedder.available=True so mocked httpx.post is called."""
+        with patch.object(Embedder, "available", new_callable=PropertyMock, return_value=True):
+            yield
 
     @patch("integradio.embedder.httpx.post")
     def test_cache_clear(self, mock_post):
