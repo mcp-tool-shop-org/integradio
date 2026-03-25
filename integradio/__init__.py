@@ -122,6 +122,10 @@ from .specialized import (
 def __getattr__(name: str):
     """Lazy import optional modules."""
     import importlib
+    if name == "diagnose":
+        from .diagnose import diagnose as _diagnose
+        globals()["diagnose"] = _diagnose
+        return _diagnose
     if name == "events":
         module = importlib.import_module(".events", __name__)
         globals()["events"] = module
@@ -133,7 +137,7 @@ def __getattr__(name: str):
     raise AttributeError(f"module {__name__!r} has no attribute {name!r}")
 
 
-__version__ = "0.3.0"
+__version__ = "1.0.1"
 __all__ = [
     # Core
     "SemanticBlocks",
@@ -205,6 +209,8 @@ __all__ = [
     "ChatMetadata",
     "VisualizationMetadata",
     "Model3DMetadata",
+    # Diagnostics
+    "diagnose",
     # Events (access via integradio.events)
     "events",
     # Visual specifications (access via integradio.visual)
