@@ -306,13 +306,14 @@ integradio/
 ├── api.py             # FastAPI routes
 ├── viz.py             # Graph visualization (Mermaid, D3.js, ASCII)
 ├── circuit_breaker.py # Resilience pattern for external services
+├── diagnose.py        # Runtime health checker (dependencies, Ollama status)
 ├── exceptions.py      # Exception hierarchy
 ├── logging_config.py  # Structured logging
 ├── pages/             # 10 pre-built page templates
 ├── events/            # WebSocket event mesh with HMAC signing
-├── visual/            # Design tokens, themes, Figma sync
+├── visual/            # Design tokens, themes, Figma sync, screenshot analysis
 ├── agent/             # LangChain tools and MCP server
-└── inspector/         # Component tree navigation
+└── inspector/         # Component tree navigation and live search
 ```
 
 ## Security & Data Scope

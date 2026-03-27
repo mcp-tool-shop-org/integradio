@@ -18,26 +18,9 @@ diagram = generate_mermaid(demo)
 print(diagram)
 ```
 
-Output:
-
-```mermaid
-graph LR
-    A["Search Query (Textbox)"] -->|click| B["Search (Button)"]
-    B -->|click| C["Results (Markdown)"]
-```
+The output is a top-down (`graph TD`) Mermaid diagram with nodes styled by component type: buttons get trigger styling, inputs get input styling, and outputs get output styling. Links are labeled with their relationship type (trigger, dataflow).
 
 Paste the output into any Mermaid-compatible renderer (GitHub markdown, Notion, Obsidian, etc.).
-
-### Customizing Mermaid output
-
-```python
-diagram = generate_mermaid(
-    demo,
-    direction="TD",        # Top-down layout (default: "LR")
-    show_intents=True,     # Include intent text in node labels
-    show_tags=True,        # Show tags as node annotations
-)
-```
 
 ## D3.js interactive graphs
 
@@ -46,33 +29,19 @@ Generate a self-contained HTML page with an interactive force-directed graph:
 ```python
 from integradio.viz import generate_html_graph
 
-html = generate_html_graph(demo)
+html = generate_html_graph(demo, width=800, height=600)
 
 with open("graph.html", "w") as f:
     f.write(html)
 ```
 
-The HTML page includes:
+The `width` and `height` parameters control the initial SVG dimensions, though the graph auto-sizes to the browser window. The HTML page includes:
 
-- **Drag-and-drop nodes** — rearrange the layout interactively
-- **Hover tooltips** — show component intent, tags, and metadata
-- **Zoom and pan** — navigate large graphs
-- **Color coding** — nodes colored by component type (input, output, bidirectional)
-- **Edge labels** — event types (click, change, submit, etc.)
-
-### Customizing the D3 graph
-
-```python
-html = generate_html_graph(
-    demo,
-    width=1200,
-    height=800,
-    node_radius=20,
-    link_distance=150,
-    charge_strength=-300,
-    dark_mode=True,         # Dark background (default: True)
-)
-```
+- **Drag-and-drop nodes** -- rearrange the layout interactively
+- **Hover tooltips** -- show component type, intent, and ID
+- **Live search** -- filter nodes by typing in the search box
+- **Color coding** -- nodes colored by component type (Button, Textbox, Markdown, Image, etc.)
+- **Arrow markers** -- edges use directional arrows colored by relationship type
 
 ## ASCII art
 
@@ -81,17 +50,10 @@ For terminal-friendly output, generate an ASCII representation:
 ```python
 from integradio.viz import generate_ascii_graph
 
-print(generate_ascii_graph(demo))
+print(generate_ascii_graph(demo, max_width=80))
 ```
 
-Output:
-
-```
-[Search Query] --click--> [Search] --click--> [Results]
-     Textbox                Button              Markdown
-  "user enters            "triggers            "displays
-   search terms"           search"              results"
-```
+The output groups components by type, shows their intents, and lists dataflow connections. The `max_width` parameter controls the line width of separator bars.
 
 ## Component tracing
 
@@ -100,21 +62,17 @@ Trace the upstream and downstream connections of a specific component:
 ```python
 # Get the full dependency chain for a component
 trace = demo.trace(results_component)
+# Returns a dict:
+# {
+#   "upstream": [{"id": 1, "type": "Textbox", "intent": "...", "label": "..."}],
+#   "downstream": [{"id": 3, "type": "Markdown", "intent": "...", "label": "..."}],
+# }
 
-print(f"Upstream: {[c.label for c in trace.upstream]}")
-print(f"Downstream: {[c.label for c in trace.downstream]}")
-print(f"Events: {trace.events}")
-```
+for comp in trace["upstream"]:
+    print(f"Feeds into this: {comp['label']} ({comp['type']})")
 
-### Visual trace
-
-Combine tracing with Mermaid to highlight a specific path:
-
-```python
-from integradio.viz import generate_mermaid
-
-diagram = generate_mermaid(demo, highlight=results_component)
-# Highlighted nodes are styled with a different color
+for comp in trace["downstream"]:
+    print(f"This feeds into: {comp['label']} ({comp['type']})")
 ```
 
 ## FastAPI integration
@@ -134,61 +92,57 @@ This adds the following routes:
 
 Search components by natural language query.
 
+**Parameters:** `q` (required), `k` (default 10, max 1000), `type` (optional component type filter), `tags` (optional comma-separated tag filter)
+
 ```bash
 curl "http://localhost:8000/semantic/search?q=user+input&k=5"
 ```
 
 ```json
-[
-  {
-    "id": "comp_001",
-    "label": "Search Query",
-    "type": "Textbox",
-    "intent": "user enters search terms",
-    "score": 0.932,
-    "tags": ["input", "text"]
-  }
-]
+{
+  "query": "user input",
+  "count": 1,
+  "results": [
+    {
+      "component_id": 1,
+      "type": "Textbox",
+      "intent": "user enters search terms",
+      "label": "Search Query",
+      "score": 0.932,
+      "tags": ["input", "text"],
+      "source": { "file": "app.py", "line": 12 }
+    }
+  ]
+}
 ```
 
-### `GET /semantic/component/{id}`
+### `GET /semantic/component/{component_id}`
 
-Get full metadata for a specific component.
+Get full metadata for a specific component, including relationships.
 
 ```bash
-curl "http://localhost:8000/semantic/component/comp_001"
+curl "http://localhost:8000/semantic/component/1"
 ```
 
 ### `GET /semantic/graph`
 
-Export the entire component graph as JSON (D3-compatible format).
+Export the entire component graph as JSON (D3-compatible format with `nodes` and `links` arrays).
 
 ```bash
 curl "http://localhost:8000/semantic/graph"
 ```
 
-```json
-{
-  "nodes": [
-    { "id": "comp_001", "label": "Search Query", "type": "Textbox", "intent": "..." }
-  ],
-  "links": [
-    { "source": "comp_001", "target": "comp_002", "event": "click" }
-  ]
-}
-```
-
-### `GET /semantic/trace/{id}`
+### `GET /semantic/trace/{component_id}`
 
 Trace upstream and downstream connections for a component.
 
 ```bash
-curl "http://localhost:8000/semantic/trace/comp_003"
+curl "http://localhost:8000/semantic/trace/3"
 ```
 
 ### `GET /semantic/summary`
 
-Get a plain-text summary of all registered components.
+Get a JSON summary of all registered components, grouped by type.
 
 ```bash
 curl "http://localhost:8000/semantic/summary"

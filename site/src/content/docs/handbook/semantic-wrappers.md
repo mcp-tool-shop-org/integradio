@@ -27,16 +27,17 @@ name_input = semantic(
 | Parameter | Type | Description |
 |-----------|------|-------------|
 | `component` | Any Gradio component | The component to wrap |
-| `intent` | `str` | Natural language description of what this component does |
-| `tags` | `list[str]` (optional) | Additional tags for filtering and categorization |
+| `intent` | `str` (optional) | Natural language description of what this component does. Auto-inferred from label if omitted. |
+| `tags` | `list[str]` (optional) | Additional tags for filtering and categorization. Merged with auto-inferred tags. |
+| `visual` | `VisualSpec` (optional) | Visual specification for appearance definition |
 
-The intent string is embedded into a vector via Ollama. Tags are stored as metadata for filtering.
+The intent string is embedded into a vector via Ollama. Tags are stored as metadata for filtering. If you omit `intent`, it defaults to the component's label or type name.
 
 ## Specialized wrappers
 
 For components with complex behavior, specialized wrappers automatically generate rich semantic tags based on the component's configuration.
 
-### `semantic_chatbot` — Chatbot
+### `semantic_chatbot` -- Chatbot
 
 ```python
 from integradio import semantic_chatbot
@@ -47,13 +48,13 @@ chat = semantic_chatbot(
     supports_streaming=True,
     supports_like=True,
 )
-# Auto-tags: ["io", "conversation", "ai", "streaming",
-#             "persona-coder", "code-assistant", "programming"]
+# Auto-tags include: "streaming", "feedback", "likeable",
+#   "persona-coder", "code-assistant", "programming"
 ```
 
-**Parameters:** `persona` (str), `supports_streaming` (bool), `supports_like` (bool)
+**Parameters:** `persona` (str: "assistant", "coder", "tutor", "creative", "analyst"), `supports_streaming` (bool), `supports_retry` (bool), `supports_undo` (bool), `supports_like` (bool), `message_format` (str)
 
-### `semantic_image_editor` — ImageEditor
+### `semantic_image_editor` -- ImageEditor
 
 ```python
 from integradio import semantic_image_editor
@@ -64,13 +65,13 @@ editor = semantic_image_editor(
     supports_masks=True,
     tools=["brush", "eraser"],
 )
-# Auto-tags: ["input", "media", "editor", "visual",
-#             "inpainting", "masking", "tool-brush", "tool-eraser"]
+# Auto-tags include: "tool-brush", "tool-eraser",
+#   "masking", "segmentation-input", "inpainting", "generative", "inpaint", "fill"
 ```
 
-**Parameters:** `use_case` (str), `supports_masks` (bool), `tools` (list[str])
+**Parameters:** `use_case` (str: "inpainting", "annotation", "segmentation", "photo_editing"), `supports_masks` (bool), `supports_layers` (bool), `tools` (list[str]), `output_format` (str)
 
-### `semantic_annotated_image` — AnnotatedImage
+### `semantic_annotated_image` -- AnnotatedImage
 
 ```python
 from integradio import semantic_annotated_image
@@ -80,13 +81,13 @@ detections = semantic_annotated_image(
     annotation_type="bbox",
     entity_types=["person", "car", "dog"],
 )
-# Auto-tags: ["output", "media", "annotation", "bbox",
-#             "detection", "detects-person", "detects-car", "detects-dog"]
+# Auto-tags include: "bbox", "bounding-box", "detection", "localization",
+#   "detects-person", "detects-car", "detects-dog"
 ```
 
-**Parameters:** `annotation_type` (str: "bbox" | "segmentation" | "keypoint"), `entity_types` (list[str])
+**Parameters:** `annotation_type` (str: "bbox", "segmentation", "polygon", "keypoint"), `entity_types` (list[str]), `color_map` (dict), `supports_overlapping` (bool)
 
-### `semantic_highlighted_text` — HighlightedText
+### `semantic_highlighted_text` -- HighlightedText
 
 ```python
 from integradio import semantic_highlighted_text
@@ -96,13 +97,13 @@ entities = semantic_highlighted_text(
     annotation_type="ner",
     entity_types=["PERSON", "ORG", "LOC"],
 )
-# Auto-tags: ["output", "text", "annotation", "nlp", "ner",
-#             "person-entity", "organization-entity", "location-entity"]
+# Auto-tags include: "ner", "named-entity", "entity-recognition", "extraction",
+#   "person-entity", "organization-entity", "location-entity"
 ```
 
-**Parameters:** `annotation_type` (str: "ner" | "sentiment" | "classification"), `entity_types` (list[str])
+**Parameters:** `annotation_type` (str: "ner", "pos", "sentiment", "classification", "highlight"), `entity_types` (list[str]), `color_map` (dict)
 
-### `semantic_multimodal` — MultimodalTextbox
+### `semantic_multimodal` -- MultimodalTextbox
 
 ```python
 from integradio import semantic_multimodal
@@ -112,13 +113,13 @@ vlm_input = semantic_multimodal(
     use_case="image_analysis",
     accepts_images=True,
 )
-# Auto-tags: ["input", "text", "multimodal", "vision",
-#             "image-input", "image_analysis", "vlm"]
+# Auto-tags include: "vision", "image-input", "document-input",
+#   "image_analysis", "analysis", "vlm"
 ```
 
-**Parameters:** `use_case` (str), `accepts_images` (bool), `accepts_audio` (bool), `accepts_video` (bool)
+**Parameters:** `use_case` (str: "chat", "document_qa", "image_analysis", "code_review"), `accepts_images` (bool), `accepts_files` (bool), `accepts_audio` (bool), `max_files` (int), `file_types` (list[str])
 
-### `semantic_plot` — LinePlot / BarPlot / ScatterPlot
+### `semantic_plot` -- LinePlot / BarPlot / ScatterPlot
 
 ```python
 from integradio import semantic_plot
@@ -129,70 +130,77 @@ metrics_chart = semantic_plot(
     data_domain="metrics",
     axes=["date", "value"],
 )
-# Auto-tags: ["output", "visualization", "chart-line",
-#             "timeseries", "domain-metrics"]
+# Auto-tags include: "chart-line", "timeseries", "trend", "continuous",
+#   "interactive-viz", "domain-metrics"
 ```
 
-**Parameters:** `chart_type` (str: "line" | "bar" | "scatter"), `data_domain` (str), `axes` (list[str])
+**Parameters:** `chart_type` (str: "line", "bar", "scatter", "pie", "heatmap", "histogram" -- auto-inferred from component if omitted), `data_domain` (str), `axes` (list[str]), `interactive` (bool), `supports_zoom` (bool), `supports_pan` (bool)
 
-### `semantic_model3d` — Model3D
+### `semantic_model3d` -- Model3D
 
 ```python
 from integradio import semantic_model3d
 
 viewer = semantic_model3d(
     gr.Model3D(label="3D Preview"),
-    format="glb",
-    use_case="product_preview",
+    use_case="game_asset",
+    supports_animation=True,
+    supported_formats=["glb", "gltf"],
 )
-# Auto-tags: ["output", "media", "3d", "glb", "product_preview"]
+# Auto-tags include: "format-glb", "format-gltf", "animated", "rigged",
+#   "textured", "orbitable", "game_asset", "game-dev", "asset"
 ```
 
-**Parameters:** `format` (str), `use_case` (str)
+**Parameters:** `use_case` (str: "mesh_generation", "cad_viewer", "game_asset", "medical", "architectural"), `supported_formats` (list[str], default: ["obj", "glb", "gltf"]), `supports_animation` (bool), `supports_textures` (bool), `camera_controls` (bool)
 
-### `semantic_dataframe` — DataFrame
+### `semantic_dataframe` -- DataFrame
 
 ```python
 from integradio import semantic_dataframe
 
 table = semantic_dataframe(
-    gr.Dataframe(label="Results"),
+    gr.DataFrame(label="Results"),
+    data_domain="database",
     editable=True,
-    columns=["name", "score", "status"],
+    columns=["id", "name", "value"],
 )
-# Auto-tags: ["io", "data", "tabular", "editable",
-#             "col-name", "col-score", "col-status"]
+# Auto-tags include: "editable", "interactive-data",
+#   "domain-database", "sql", "query-results",
+#   "has-identifier", "has-entity"
 ```
 
-**Parameters:** `editable` (bool), `columns` (list[str])
+**Parameters:** `data_domain` (str: "database", "spreadsheet", "metrics", "logs", "inventory", "users"), `editable` (bool), `columns` (list[str]), `row_count` (int)
 
-### `semantic_file_explorer` — FileExplorer
+### `semantic_file_explorer` -- FileExplorer
 
 ```python
 from integradio import semantic_file_explorer
 
 files = semantic_file_explorer(
     gr.FileExplorer(label="Project Files"),
-    root_dir="./workspace",
-    glob_pattern="**/*.py",
+    root_type="code_project",
+    file_types=[".py", ".js", ".ts"],
 )
-# Auto-tags: ["io", "filesystem", "explorer", "python-files"]
+# Auto-tags include: "code_project", "source-code", "repository", "code-files"
 ```
 
-**Parameters:** `root_dir` (str), `glob_pattern` (str)
+**Parameters:** `root_type` (str: "code_project", "documents", "media", "data", "config"), `file_types` (list[str])
 
 ## Auto-tags explained
 
 Every specialized wrapper generates tags automatically based on:
 
-1. **Direction** — `input`, `output`, or `io` (bidirectional)
-2. **Domain** — `media`, `text`, `data`, `visualization`, `filesystem`, `conversation`
-3. **Capabilities** — `streaming`, `masking`, `editable`, etc.
-4. **Specifics** — entity types, tool names, column names, chart types
+1. **Capabilities** -- `streaming`, `masking`, `editable`, `orbitable`, etc.
+2. **Domain** -- `domain-metrics`, `domain-database`, `game-dev`, etc.
+3. **Tools/Formats** -- `tool-brush`, `format-glb`, `code-files`, etc.
+4. **Entities** -- `detects-person`, `person-entity`, `has-temporal`, etc.
 
 These tags are stored alongside the vector embedding and can be used for filtered search:
 
 ```python
 # Search only among visualization components
-results = demo.search("show me metrics", tags=["visualization"])
+results = demo.search("show me metrics", tags=["chart-line"])
+
+# Search only among Textbox components
+results = demo.search("user input", component_type="Textbox")
 ```

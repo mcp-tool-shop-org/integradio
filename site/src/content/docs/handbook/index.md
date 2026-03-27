@@ -5,17 +5,18 @@ sidebar:
   order: 0
 ---
 
-Welcome to the **Integradio Handbook** — your complete guide to building Gradio applications with semantic intelligence.
+Welcome to the **Integradio Handbook** -- your complete guide to building Gradio applications with semantic intelligence.
 
 Integradio extends [Gradio](https://gradio.app/) with vector embeddings powered by [Ollama](https://ollama.ai/) and `nomic-embed-text`. Components carry semantic intents, making them discoverable by meaning rather than by ID or label alone.
 
 ## What you'll learn
 
-- [**Getting Started**](getting-started/) — Install Integradio, set up Ollama, and wrap your first component
-- [**Semantic Wrappers**](semantic-wrappers/) — The core `semantic()` function and all specialized wrappers for complex components
-- [**Page Templates**](page-templates/) — 10 pre-built layouts for common UI patterns (Chat, Dashboard, Gallery, and more)
-- [**Visualization**](visualization/) — Mermaid diagrams, D3.js interactive graphs, ASCII art, and FastAPI integration
-- [**Reference**](reference/) — SemanticBlocks API, architecture internals, events, WebSocket mesh, and security scope
+- [**Beginners**](beginners/) -- Zero-to-working-app walkthrough, prerequisites, troubleshooting
+- [**Getting Started**](getting-started/) -- Install Integradio, set up Ollama, and wrap your first component
+- [**Semantic Wrappers**](semantic-wrappers/) -- The core `semantic()` function and all specialized wrappers for complex components
+- [**Page Templates**](page-templates/) -- 10 pre-built layouts for common UI patterns (Chat, Dashboard, Gallery, and more)
+- [**Visualization**](visualization/) -- Mermaid diagrams, D3.js interactive graphs, ASCII art, and FastAPI integration
+- [**Reference**](reference/) -- SemanticBlocks API, architecture internals, events, WebSocket mesh, inspector, visual system, and security scope
 
 ## Who is this for?
 

@@ -82,11 +82,11 @@ Once components are wrapped, you can search for them semantically:
 # Find all components related to "user input"
 matches = demo.search("user input", k=5)
 for match in matches:
-    print(f"{match.label} (score: {match.score:.3f})")
+    print(f"{match.metadata.label} (score: {match.score:.3f})")
 
-# Get the single best match
+# Get the single best Gradio component
 best = demo.find("where does the user type?")
-print(best.label)  # "Search Query"
+# Returns the raw Gradio component (e.g., a gr.Textbox instance) or None
 
 # Print a summary of all registered components
 print(demo.summary())
